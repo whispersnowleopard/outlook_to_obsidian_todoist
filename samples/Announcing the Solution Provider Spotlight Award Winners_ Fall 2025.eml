@@ -1,0 +1,1310 @@
+Received: from MW4PR10MB5883.namprd10.prod.outlook.com (2603:10b6:303:18f::20)
+ by BYAPR10MB2485.namprd10.prod.outlook.com with HTTPS; Tue, 2 Dec 2025
+ 12:09:24 +0000
+Received: from BY5PR03CA0015.namprd03.prod.outlook.com (2603:10b6:a03:1e0::25)
+ by MW4PR10MB5883.namprd10.prod.outlook.com (2603:10b6:303:18f::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.9; Tue, 2 Dec
+ 2025 12:09:21 +0000
+Received: from SJ5PEPF000001F0.namprd05.prod.outlook.com
+ (2603:10b6:a03:1e0:cafe::cb) by BY5PR03CA0015.outlook.office365.com
+ (2603:10b6:a03:1e0::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Tue,
+ 2 Dec 2025 12:09:21 +0000
+Authentication-Results: spf=softfail (sender IP is 147.154.114.232)
+ smtp.mailfrom=phx1.rp.oracleemaildelivery.com; dkim=fail (body hash did not
+ verify) header.d=netsuite.com;dkim=fail (body hash did not verify)
+ header.d=phx1.rp.oracleemaildelivery.com;dmarc=fail action=oreject
+ header.from=netsuite.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phx1.rp.oracleemaildelivery.com discourages use of 147.154.114.232 as
+ permitted sender)
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (147.154.114.232) by SJ5PEPF000001F0.mail.protection.outlook.com
+ (10.167.242.68) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.8 via Frontend
+ Transport; Tue, 2 Dec 2025 12:09:21 +0000
+Received: from pps.filterd (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 5B29sBlq016488
+	for <dgilbert@netsuite.com>; Tue, 2 Dec 2025 12:09:21 GMT
+Received: from mx0a-00069f01.pphosted.com (mx0a-00069f01.pphosted.com [205.220.165.26])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 4aqq991nau-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <dgilbert@netsuite.com>; Tue, 02 Dec 2025 12:09:21 +0000
+Received: from pps.filterd (m0246575.ppops.net [127.0.0.1])
+	by mx0b-00069f01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5B28t0Wc3267657
+	for <dgilbert@netsuite.com>; Tue, 2 Dec 2025 12:09:20 GMT
+Authentication-Results-Original: ppops.net;	spf=pass
+ smtp.mailfrom=bounces+dgilbert=netsuite.com@phx1.rp.oracleemaildelivery.com;
+	dkim=pass header.s=c1rhfm3r2q header.d=netsuite.com;	dkim=pass
+ header.s=prod-phx-20191217 header.d=phx1.rp.oracleemaildelivery.com;
+	dmarc=pass header.from=netsuite.com
+Received: from aib29ajc171.phx1.oracleemaildelivery.com (aib29ajc171.phx1.oracleemaildelivery.com [192.29.103.171])
+	by mx0b-00069f01.pphosted.com (PPS) with ESMTPS id 4asw15271r-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO)
+	for <dgilbert@netsuite.com>; Tue, 02 Dec 2025 12:09:19 +0000 (GMT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=c1rhfm3r2q;
+ d=netsuite.com;
+ h=Date:To:From:Subject:Message-Id:MIME-Version:Sender:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=q/HHK7Ot/SSsXLQk/nVP4nTfJB4vqSvlvvhz249v4iw=;
+ b=oD6UlaKTHIF5MBJ3c3cpLychMo8MXf3ex7vOo/Doc51O5yEFIXHvDYfHNcobsEJE7BTnxRkBq2oh
+   +AqlrVyDmYufWXJrjmFkT1frjQKpfaHnlYL9KTAHVd/3b++Dcg561akZQ7hxsD/zYhX7PiMfQo+y
+   a3/HINLB9QUDmcu2yqYqoipwwFj5xiIpbzrg0zbSNq6H+cH7gPApQ6F/skEZ9yA+hV03EzZKVibB
+   KkrCcsgRmb5GJfO2ozcywqQqfztO1MahOpSm+H2joFh5/t3k6PWyc81NcLGdVayth4bBQIAsB5ue
+   Ni79EFLrEDY19uixAfQpDHmjJzQo1qHVoiGmuQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=prod-phx-20191217;
+ d=phx1.rp.oracleemaildelivery.com;
+ h=Date:To:From:Subject:Message-Id:MIME-Version:Sender:List-Unsubscribe:List-Unsubscribe-Post;
+ bh=q/HHK7Ot/SSsXLQk/nVP4nTfJB4vqSvlvvhz249v4iw=;
+ b=foJecxA8XULr+u2vi/+JLbuR+iQX6Sn2GYJnTFK9J6+JWprIyFZSW6awqN8wnuP3zaXhuXkYrMQ+
+   Q42gOO5OGh+eUvoDGgBeRrPlhdYVFp2V31oXSxA6WTLfLfvytzf53KaZkXbmAl+pmpPHB4XRfqRG
+   4SeYgo3pMQe/qa6VNyyuduIbBwyDCs16BTbX4Bv7IRBzn+CvKi6TJB6z2oXb5uU6bzGSILJ/SfBl
+   5nPFfBEv+EermpM7BLXhFiErHjEFIeakz3OiA0va3p/rlYTJWsYDpXLR5zk2XD+8rVuTa8X7RleE
+   yQYXlu2dLTTXQ9NC2sI21wtgjFFtsuFK0vKnDw==
+Received: by omta-ad3-fd1-303-us-phoenix-1.omtaad3.vcndpphx.oraclevcn.com
+ (Oracle Communications Messaging Server 8.1.0.1.20251014 64bit (built Oct 14
+ 2025))
+ with ESMTPS id <0T6N00FGG5RJ9980@omta-ad3-fd1-303-us-phoenix-1.omtaad3.vcndpphx.oraclevcn.com> for
+ dgilbert@netsuite.com; Tue, 02 Dec 2025 12:09:19 +0000 (GMT)
+Date: Tue, 2 Dec 2025 04:09:19 -0800 (PST)
+From: NetSuite <netsuite@netsuite.com>
+Reply-To: NetSuite
+ <campaigns.NLCORP.375230995.7ebb8daf36@nlcorp.email.netsuite.com>
+To: dgilbert@netsuite.com
+Message-id: <aj81j0d5bcvtckjd1qfk5uvkmsz6ueej6oicxgnae7wiqbd6w59s83f6byfx7xto@netsuite.com>
+Subject: Announcing the Solution Provider Spotlight Award Winners: Fall 2025
+Content-Type: multipart/alternative;
+	boundary="----=_Part_1314_1366863802.1764677359271"
+Require-Recipient-Valid-Since: dgilbert@netsuite.com; Wed,
+ 1 Oct 2025 13:03:42 -0700 (PDT)
+List-Unsubscribe: <https://info.netsuite.com/app/crm/marketing/campaignlistener.nl?c=NLCORP&__lstr=__su&__r=375230995&__oi=u&__h=AAFdikaIMRC6-dNw8T2xXHjrv7u4L_DlP8F-hTIKC-NiqhgtIE0>,
+ <mailto:NetSuite
+ <campaigns.NLCORP.375230995.7ebb8daf36@nlcorp.email.netsuite.com>?subject=unsubscribe>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-MailingID: CAMPAIGN; scompid=NLCORP; code=375230995; recipient=30677628;
+ campaign=223506393; campaignevent=2139889; type=EMAIL
+X-NetSuite: c=NLCORP; s=ns.be.m.fa.20.prod.phx.na11; v=2025.2.13; t=Campaign;
+ ec=false
+X-NetSuite-SourceDcId: phx-na11
+X-NetSuite-MetaData: {"type":"company","basicEmailMetaData":{"mailingId":"CAMPAIGN; scompid=NLCORP;
+ code=375230995; recipient=30677628; campaign=223506393; campaignevent=2139889;
+ type=EMAIL","messageId":"<aj81j0d5bcvtckjd1qfk5uvkmsz6ueej6oicxgnae7wiqbd6w59s83f6byfx7xto@netsuite.com>"},"compId":"NLCORP","originalFrom":"netsuite@netsuite.com","shouldForwardBounce":false}
+Reporting-Meta: AAGJLbASXeD8rjqnlwXCeD0QpNwM+5IoHYiz15TEnfrqKoOnMjyuOn3eJaCtCjeu
+ fsKStjic9lQwhhhCA1cHRNJ1hri2p/regjVj3UNUBP3vtMbIh/guQUDuDqLKypi5
+ d5Vxyz3XxKRsaMvoJjKKqEAJNWDDUNgVmPlIK3GWH892HC+LhpWhmeAE2Vg5cNr8
+ M3GFl2onh1mSFHntIKS3JrEp1YC5dTIORKDBw7NRRGBS4teg6Q1VzbU82Pl5Lj3F
+ RjWChVDLKF4QDWLpeloExvpXFCWUUuWV/5r4K9L/pplcUZV/R+TjIulZnFQSMBs2
+ wo8HPA6BMqqXuIYVYJR44NqFB1A8BXYfwadrTl73q5/0wupi0pizXIK5vvYRlN8b
+ Qg/D55CcZXRNmBOkhqbQkjsSomDSVfkIIJBjqdGuNTjK31A6UkQxP0zlsm/8t1CY
+ 3FrOxBAunWjJmPcKTD6kxgct+i83hGACSRb9eUstpOJkUg4MYhTzmi4+ip6Q4tPO
+ +LbgUzh8MBkWU0BtCyosJhi07099ghDfuHkjVQVzXyPbbdM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjAyMDA5NyBTYWx0ZWRfXylSNTD31XNqt
+ 5oxSlP9de+Gm/LvfEvgjHh1hUtz15hiKz/yRSLEjcjrnn6ek8Z1rHGjmqcXA7gDkgPDCex1aMDF
+ Aq1yYVQsmg6r+CVkqO+WCadIDr5TPMrPFnuaYqjfwTLLD0GTbznPT7s2BlkhOwaHFGfCUBXYzct
+ yiBRmh1r3ejsq4FFSHYgYcE147MeA0Z94ZM5+dVJOqDCCLT8Wi2V9TGxwSR9k5dncUT/vgoRgHX
+ xOdLB5qJ+3D9R4TmTdhrIVeVDjQ48M3GjD0dTgJ8ocQEfmsCItcG44OrMuZewk6HOV8exQaEvTE
+ EFtBQEpZTkA5cbFpVZY+V4UL6AkPPpeoPkIruG1APuuX+/8hxyg1QO4eirxeuw0esYVS+yzLwno
+ kSDol3mxM6hRvVjy3qybTJTCiLgOmeJ7wEYIFtVHN9+sfnpgkX/sr99eWQhgU/cgj8mlHTe5+L5
+ xgAitzbgBqSJU8Npr4A==
+X-Proofpoint-ORIG-GUID: 45uf9Rp_3Ec9XIqFGgWRtEfvbseB-kY5
+X-Authority-Analysis: v=2.4 cv=YMKSCBGx c=1 sm=1 tr=0 ts=692ed6f0 b=1 cx=c_pps
+ a=GXk9THNTMo1se2pwKcNfiQ==:117 a=GXk9THNTMo1se2pwKcNfiQ==:17
+ a=RRWKuz47z/eHbRJRju2EVjcL/TA=:19 a=tAZqVddlqK9lNftO:21 a=wP3pNCr1ah4A:10
+ a=SBu6v3cmFV4A:10 a=gaORNr3GFsEA:10 a=Kan8h273Bse8B8Jy5C1n:22
+ a=vDw0mIp_AAAA:8 a=i2KUSHdbcYI9_9v_bK4A:9 a=QEXdDO2ut3YA:10 a=KVPLLwXbAAAA:8
+ a=lziu2VFtAAAA:8 a=SSmOFEACAAAA:8 a=VLjy9gQdvM9La9UpHqMA:9
+ a=cnt7E-L0Ifl01-pF:21 a=frz4AuCg-hUA:10 a=_W_S_7VecoQA:10
+ a=N0NCgbtGDSRRMzdokJrg:22 a=7ytd5f7THu3G2VC3anPL:22 a=ydSwxLtyPKWpzL6u13RQ:22
+ cc=ntf
+X-CLX-Shades: MLX
+X-CLX-Response: 1TFkXGR0RCkx6Fx4SEQpZRBduQm1/TFlka0cYRxEKWFgXb3p5YXIBWlJpWEA
+ RCnhOF2RFHEBvb31DEhhFEQp4SxdvenlhcgFaUmlYQBEKQ0gXBxsZEhEKQ1kXBxkaExEKQ0kXGg
+ QaGhoRCllNF2dmchEKWUkXBxkdcR4QGBp3Bh8ecRkeExAbGhp3BhgaBhoRClleF2xseREKSUYXR
+ VhLSUZPdUNESEVfRE51QkVZXk9OEQpJRxd4T00RCkNOFx4fX0wTeFp1GW9JE3JjW2xtTX14Xm9M
+ XEhZT2gHQXMfEQpYXBcfBBoEHhsaBRsaBBsaGgQbGR4EGRkQGx4aHxoRCl5ZF01wYl9mEQpNXBc
+ eHBwRCkxaF2lrbV1NXREKTEYXb2trY2trEQpCTxdve0IfZUATQHxeHREKQ1oXGxMYBBgTBBsaGQ
+ QbHRsRCkJeFxsRCkJGF2JiaRNQTR99QUxsEQpCRxdgRUVyYn56HlhiEhEKQlwXGxEKXk4XGxEKQ
+ ksXa1l6ZWFYcmJMHmkRCkJJF2tZemVhWHJiTB5pEQpCRRdpTxJmbG4aZB5DaREKQk4Xa1l6ZWFY
+ cmJMHmkRCkJMF2AdTR9eSVB4QUZ+EQpCbBdjG3oBa2xDUGR4BREKQkAXbU1ObWRdRnBTZFsRCkJ
+ YF28aHBNiflxCWUFNEQpaWBcZEQp5QxdockZ5T3B5XxNYSBEKWUsXGxsbHBoRClpLFxsbGxwaEQ
+ pwZxdkZnNtBXBFZRhMXBAaEQpwaBdjUkxZWmhbfWAZQBAaEQpwaBdsG0F5BXttGU1SSxAZGhEKc
+ GgXYl9ib18eSGxGZUcQGRoRCnBoF25LSU55cGwcQEJ/EBkaEQpwaBd6eFNfemllXkEacxAZGhEK
+ cGgXbRNCS1JbWhlhcE8QGRoRCnBoF2JQe05abFh4fhITEBkaEQpwaBdjYGBYHGFLSF1rehAZGhE
+ KcH0XZx9kc15CGGFQR2sQGRoRCnB9F2MFUxlnQktfQmdIEBkaEQpwfRdgcEVkZx1NElwFHhAaEQ
+ pwfxdpBR5TS2wSY25AbRAbHhMRCnBfF2d8YGJFHmFYaGIYEB0aEQpwXxdnbmtselpgfRtmSBAcG
+ hEKcGwXZFpbc1hoQl9FeV4QGxgeEQptfhcaEQpYTRdLESA=
+X-Proofpoint-GUID: 45uf9Rp_3Ec9XIqFGgWRtEfvbseB-kY5
+X-Proofpoint-SPF-Result: pass
+X-Proofpoint-SPF-Record: v=spf1 ip4:162.88.4.0/23 ip4:162.88.25.0/24
+ ip4:192.29.103.128/25 ip4:208.76.63.0/24 ip4:216.146.32.0/24 ~all
+X-Source-IP: 192.29.103.171
+X-ServerName: aib29ajc171.phx1.oracleemaildelivery.com
+X-Proofpoint-Virus-Version: vendor=nai engine=6800 definitions=11630
+ signatures=596818
+X-Proofpoint-Spam-Details: rule=low_priority_poc_notspam
+ policy=low_priority_poc score=0 adultscore=0 suspectscore=0 phishscore=0
+ lowpriorityscore=0 malwarescore=0 clxscore=37 spamscore=0 bulkscore=0
+ priorityscore=48 impostorscore=0 classifier=typeunknown authscore=0 authtc=
+ authcc=notification route=inbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2510240001 definitions=main-2512020097 domainage_hfrom=11160
+ domainage_replyto=11160
+X-Spam: Clean
+Return-Path: bounces+dgilbert=netsuite.com@phx1.rp.oracleemaildelivery.com
+X-MS-Exchange-Organization-ExpirationStartTime: 02 Dec 2025 12:09:21.6565
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 290efecb-e779-424f-5bb0-08de319ba08e
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Organization-MessageDirectionality: Originating
+X-MS-Exchange-SkipListedInternetSender: ip=[192.29.103.171];domain=aib29ajc171.phx1.oracleemaildelivery.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F0:EE_|MW4PR10MB5883:EE_|BYAPR10MB2485:EE_
+X-MS-Exchange-Organization-AuthSource: SJ5PEPF000001F0.namprd05.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-OriginatorOrg: oracle.onmicrosoft.com
+X-MS-Office365-Filtering-Correlation-Id: 290efecb-e779-424f-5bb0-08de319ba08e
+X-Oracle-Tenancy: 1
+X-MS-Exchange-Organization-SCL: -1
+X-Oracle-IMR: IMR Trust
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1032899013|2092899012|12012899012|4022899009|3072899012|69100299015|5062899012|82310400026|8096899003|2066899003|13003099007;
+X-Forefront-Antispam-Report: CIP:147.154.114.232;CTRY:US;LANG:en;SCL:-1;SRV:;IPV:CAL;SFV:SFE;H:phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com;PTR:phxpaimrmta02.appoci.oracle.com;CAT:NONE;SFS:(13230040)(1032899013)(2092899012)(12012899012)(4022899009)(3072899012)(69100299015)(5062899012)(82310400026)(8096899003)(2066899003)(13003099007);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2025 12:09:21.5376
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 290efecb-e779-424f-5bb0-08de319ba08e
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=4e2c6054-71cb-48f1-bd6c-3a9705aca71b;Ip=[147.154.114.232];Helo=[phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F0.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB5883
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.3561391
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9366.012
+X-Microsoft-Antispam-Mailbox-Delivery:
+	abwl:1;ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944506478)(944626604)(920097)(821098)(255002)(410001)(930097)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?VVpUQlFCd2YzMi95YVAxUFQrOWNTMm4vaHEwZDZZMmVTdGtNem5ieFhnNzZq?=
+ =?utf-8?B?ZEFMWVl3QTg4NnBTWHNzSmp0bGVQeWh3RFprYnRVWVphVTdXcHZpcFRBTnpB?=
+ =?utf-8?B?QnpveE81THN0VTRWbWlBSXFYb3BETm1pa0RvODRxZFlqcTdZd1VrdnlWU1o1?=
+ =?utf-8?B?OGZyUzArb0tUd2RwdnhGUG8zd0FIRkRVY1hIZGlPMHRFUkVwQ28yUDJuSy9o?=
+ =?utf-8?B?ckkvQUc4cDRJY1JudjVxMEpETUw1WHRRSHdkaTlZUCtEZEliUnBzMGNHTFVF?=
+ =?utf-8?B?TWwyVnZmNHRkclhza1BhSG5GUFhSc2xyTWVMVWJWVDIrZXJSdjlod0hSRUo2?=
+ =?utf-8?B?WlFiaXE3ejladVdGM0RKSXJJTnNOUXUxQ0x4aW9Qd1Q5bE1rWU5iN09zSjJr?=
+ =?utf-8?B?d21XT1A5UHBQckhjakJqRXZDWVZOWWNGR2VsVC8zbjFYR05KSlJIeTh4cHZk?=
+ =?utf-8?B?WnZwVjFHNk9YOGFZRnpwVUN6VDM5RUgyMnlZNnVqR2ljajh3QTVnOGxpVk0z?=
+ =?utf-8?B?c3BSaUQyaWtqakg5VUJrZ0JFVVBJQnFXc2NVUGRTVC8zdDRDTUE5V1pTV1Fa?=
+ =?utf-8?B?Q0dMWHNBWThXdURQWVhSRldhQWEwL2IyU3hmVk85d0F5Lyt0YnR6eXVVQks0?=
+ =?utf-8?B?VHUrQS9aUEFtazduNC9hOWRSck1hckZ5ajVxNE1aQXloWGFKSDk5bDlaeVB3?=
+ =?utf-8?B?QUFlTVl6Y2xrMC96aHhkMzVhSkNQSHkrR05mQm9UM3I0aW1SaHVKb3UrL25p?=
+ =?utf-8?B?NGtwVVp3RjJxVGd2QjlMcTJTeEI4QS9GUHI3MXl3WlBsM041bzI2Q2pHc2Za?=
+ =?utf-8?B?MitRcnpRRmE0bmtFQTgyUS9BVVpmclFGYkR4UFFyRUliT1VwWkNaSDRtbVYr?=
+ =?utf-8?B?QTVmOEFuckE1aHhvRDNwOUNkUUxmdXVrN2tDTVFBditaU1VNL3hRK2FUdDY5?=
+ =?utf-8?B?Sm5oem15WEhsU1gySDRYYms4dEVNbVZMYk53Um5kbHo1SFBxOXpnQ3JwRFdj?=
+ =?utf-8?B?dG5sMDlvZnFXQTdzOC9aVjkxbW1QVkpYcXY4Zlp4TDBZbzVtdS9XZ05WYk1o?=
+ =?utf-8?B?SzlSL3M1WU9QTDVTcmRnRC9NZlRpa1QrMzQzRmw3QnhaZU1EWm9OS2hEZFlJ?=
+ =?utf-8?B?dWZoK05UcnhaQ00rWlhoUnlrTGtndjJjTFhRRGdRYjN1cXJOOGU0UldGVGxw?=
+ =?utf-8?B?djAwMHV0SWtKUm9KdmxObFg1SXdTZGJvK2h6RzhkbHVMSUxjT05nYW13NlY3?=
+ =?utf-8?B?TUpRY0lIS0Nhb0FWZXVRSVZ5QVZvR21wanBsbEVlTlR5YzUxRTBTazhGZ2tq?=
+ =?utf-8?B?VlYyYlNjV3VYakxCSTZyWDdtenYva2dOU0w0VHNiN2NHQlNZWEl4Tkx1eGV0?=
+ =?utf-8?B?dm9TeDRva3NNSUhleDlRbzBpaUlpdm5KeWFyRW16TXZxNHFIdVg2THRPejNT?=
+ =?utf-8?B?SUhtNWRhSmNMRDlwWEJPcGpsd054TU8xMGI5NTF6WlR1RXJwRVlyRjRsTVJi?=
+ =?utf-8?B?UmoxNW1vZUVkdVZFR3NVZENReFRaTnBBamdCSUxwOVI0R2NrTnRub2ZzNyty?=
+ =?utf-8?B?YnQrSnRrM0FLVGJGL25jdStwTjd5S1ZuRUIydkgxaEVkc1BZZjdHaGJodFVj?=
+ =?utf-8?B?SDl6Z2JOOFVnaVhJQUQ1MjNMc2twTHR6ME90UDhNMStDNWVISGxCSmU5a2tU?=
+ =?utf-8?B?aFllcjVNbWo2SzVkZ0k4ZVVRd0t0cmREOTN2Z254YjVIU2xaUWdHZ0FHUWsy?=
+ =?utf-8?B?Nk0ybVNZNzk1ZjBBb1JUdkNEbXZyTk1FcklEZkltL25OT1lKNk53VmVaWUZk?=
+ =?utf-8?B?RmlsNllPcmhpQVExT0FaT2YxUUM1Umh4bDZMcjN0VC84ZzVzSkFiZTk0MXRk?=
+ =?utf-8?B?QlJ2Z1NLOTY2MVVEN25nNFFYM3g3K3pQWVR0M1RmSkRDNTBrOTJheDUrZDRz?=
+ =?utf-8?B?bGdrVCtESUtZaktZbHIyL3lOQTV1V2tXTXpxKzdPbHJEV1FNOG9zRXlIdmlD?=
+ =?utf-8?B?MUdzbHNreVAwWk1NcEdnQit4NnRhYjRiYUdYSGs4eUozZnVSeFVDUDRtRjBN?=
+ =?utf-8?B?d2oxWGN1YUU0bkFqTG9RWktudkFpU2ZaMFh5TytHRnZjbm5yVkFEc2NlSXdm?=
+ =?utf-8?B?aFpDNUVPaXhqYyt2aGo0OGxOejNZM2s5d2k5bHhCeVZOL0xoQzlUcFpvcmli?=
+ =?utf-8?B?VitpZzRvRTFaRFllTytQeGpTMjZwZ2JUYmpkTkN6ZDVMM2l2Kzdna2dXdlI3?=
+ =?utf-8?B?ejhSYVNqN0QxOFo3L3ZpVnFDcHRBcnVyTmdNb1J1YXRTQ3FtYkJvOGs5VDRI?=
+ =?utf-8?B?RFRLQkxOUjUwdldWenE1UUxpNlN1VHVSYy95VlVzZ2J3K2pVcjdELzMrc2gy?=
+ =?utf-8?B?Rmx5T1FmdHdRcjZSTTY5WmxnYUdVaU1ZamtiaG9LQk9uUEZiMmNVdWUwemdi?=
+ =?utf-8?B?cUMvVG1JQWVTWnprYnF6ZFZIU2xkMjdEOUVqTlFYVTNWbCtWZmlXeVQrdnFR?=
+ =?utf-8?B?cUE2L0dWQVNGWkhodHZYQXZGa0VMU2JQZ0dxNVpkajc0RzJPZGJvUFVoUDZN?=
+ =?utf-8?B?UTMzWkxPc0lLNEM1aXBtV04xZ0RVaXVna3BjVStOU1N2aEd5Nlp1T2ZOR25h?=
+ =?utf-8?B?VU9MbVpiMHYrODZ0WXpnWGYvU1N4Q2tjaWl5VGJTL01LU050MVFtYy8wN0Zr?=
+ =?utf-8?B?WFAyOG9udmxmNmxHOHpjekNGdE9IK2E4bndaMGlLc3dTaU4rNEY1czlIT1U2?=
+ =?utf-8?B?cG5KLzRhWFJIWUxBY1pVUGlOZm04QjJhTXBhMUVMOG5LdGwvMTZ1bDJOMnE3?=
+ =?utf-8?B?eG1qa3U5MTQ4ZDNuYW4rUEl1amFSZFZtRmhOTmxRbWcyNW94MjZkdHBxQWtL?=
+ =?utf-8?B?VE1BUTM0L2EvS2xFWUp0RnBiYkF5T0VPMVEyTUdQWVM3dm1yRXpza0NkZ3N1?=
+ =?utf-8?B?ZTZuOFBVTkZLN0hqQTJxUEk4VHZ3V0NBd1hmb1FpUVp2M0FDVUNpdDRIempT?=
+ =?utf-8?Q?sPk0aVFRLdxVhUuXvpZTI3BR5qENN0tr0MF?=
+MIME-Version: 1.0
+
+------=_Part_1314_1366863802.1764677359271
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+[Oracle NetSuite]
+=C2=A0 =09
+=C2=A0
+Solution Provider Spotlight Award Winners: Fall 2025
+=C2=A0
+Congratulations to our Fall 2025 Spotlight Award winners! We recognize your=
+ outstanding work in implementing NetSuite for our customers.
+=C2=A0
+=C2=A0
+=C2=A0 =09
+=C2=A0
+Industry Spotlight Winners
+=C2=A0
+Apparel, Footwear and Accessories
+Citrin Cooperman 	 Automotive
+Oasis Solutions
+Energy/Solar
+Protelo, Inc. 	 Healthcare
+Luxent
+Logistics and Transportation
+Cirrus ERP Partners 	 Medical Devices and Equipment
+Strategic Information Group
+Retail
+CohnReznick Advisory LLC 	 Wholesale Distribution
+GURUS Solutions
+=C2=A0
+=C2=A0
+=C2=A0 =09
+=C2=A0
+Competitive Spotlight Winner
+=C2=A0
+SAP Switch
+ERP Success Partners
+=C2=A0
+=C2=A0
+=C2=A0 =09
+=C2=A0
+Private Equity Spotlight Winners
+=C2=A0
+Carveout
+Business Solution Partners 	 Increasing Business Visibility
+Citrin Cooperman
+Mergers and Acquisitions
+GURUS Solutions 	 Rapid Scaling
+Terillium, Inc.
+Transforming Business Operations
+GURUS Solutions 	=20
+=C2=A0
+=C2=A0
+=C2=A0 =09
+=C2=A0
+Please find the full list of winners on the NetSuite website here. Thank yo=
+u to all our Solution Providers who submitted client stories for considerat=
+ion!
+=C2=A0
+=C2=A0
+[Oracle NetSuite]
+[Oracle NetSuite]
+2300 Oracle Way | Austin, TX 78741 | United States | +1 737.867.1000
+=C2=A9 Oracle, and/or its affiliates.
+Terms of Use and Privacy | Contact Us | Code of Conduct
+Manage Email Preferences | Unsubscribe from All
+[Facebook]     [LinkedIn]     [Twitter]     [Instagram]
+------------------------------------------------------------------------
+  	 You are subscribed as <dgilbert@netsuite.com>. Click here to manage you=
+r email subscription preferences.
+Click here or reply to this email with 'unsubscribe' in the subject to unsu=
+bscribe from this list or if you feel you have received this message in err=
+or.
+This message was sent from NetSuite Oracle America, Inc. 500 Oracle Parkway=
+ Redwood Shores CA 94065 United States 800 762 5524 http://www.netsuite.com=
+ . Click here to report email abuse.
+
+------=_Part_1314_1366863802.1764677359271
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns=3D"http://www.w3.=
+org/1999/xhtml"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><t=
+itle>Solution Provider Spotlight Award Winners: Fall 2025</title>
+
+<meta property=3D"og:title" content=3D" ">
+<meta property=3D"og:description" content=3D" ">
+<meta property=3D"og:image" content=3D" ">
+<meta property=3D"og:site_name" content=3D" ">
+
+<meta property=3D"article:publisher" content=3D" ">
+
+<meta name=3D"twitter:card" content=3D" ">
+<meta name=3D"twitter:site" content=3D" ">
+<meta name=3D"twitter:url" content=3D" ">
+<meta name=3D"twitter:title" content=3D" ">
+<meta name=3D"twitter:description" content=3D" ">
+
+<meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1.=
+0 ">
+<meta name=3D"format-detection" content=3D"telephone=3Dno">
+=09
+<style type=3D"text/css">
+/* CLIENT-SPECIFIC STYLES */
+/* Prevent WebKit and Windows mobile changing default text sizes */
+body {margin: 0 !important; padding: 0 !important;}
+body, table, td, a{-webkit-text-size-adjust: 100% !important; -ms-text-size=
+-adjust: 100% !important; -webkit-font-smoothing: antialiased !important;}
+/* Remove spacing between tables in Outlook 2007 and up */
+table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: co=
+llapse;}
+#backgroundTable {margin:0; padding:0; width:100% !important;}
+td, a, span {mso-line-height-rule: exactly;}
+/* Allow smoother rendering of resized image in Internet Explorer */
+img{-ms-interpolation-mode: bicubic;}
+
+/* RESET STYLES */
+img{border: 0 !important; height: auto; line-height: 100%; outline: none !i=
+mportant; text-decoration: none;}
+a img{border:none !important;}
+table{border-collapse: collapse !important;}
+body{height: 100% !important; margin: 0 !important; padding: 0 !important; =
+width: 100% !important;}
+p {margin: 0 !important; padding: 0 !important;}
+
+/* iOS BLUE LINKS */
+a[x-apple-data-detectors] {
+color: inherit !important;
+text-decoration: none !important;
+font-size: inherit !important;
+font-family: inherit !important;
+font-weight: inherit !important;
+line-height: inherit !important;
+}
+
+/* ANDROID CENTER FIX */
+div[style*=3D"margin: 16px 0"] {margin:0 !important;}
+
+/* OTHER STYLES */
+.ExternalClass {width: 100%;}
+.ExternalClass * {line-height: 100%;}
+
+/* CUSTOM STYLES */
+.em_white_link a {
+text-decoration: none;
+color: #ffffff;
+}
+.em_grey_link a {
+text-decoration: none;
+color: #666666;
+}
+.em_white_txt a {
+text-decoration: none;
+color: #ffffff;
+}
+.em_dark_grey_txt a {
+text-decoration: none;
+color: #040707;
+}
+.em_grey_txt a {
+text-decoration: none;
+color: #666666;
+}
+
+ol > li::marker {
+  font-weight: bold;
+}
+=09
+=09
+/* MOBILE STYLES */
+@media only screen and (max-width:480px) {
+table[class=3Dem_main_table] {
+width: 100% !important;
+}
+table[class=3Dem_wrapper_box] {
+width: 100% !important;
+margin-bottom: 20px !important;
+}
+table[class=3Dem_wrapper] {
+width: 100% !important;
+}
+td[class=3Dem_hide], br[class=3Dem_hide] {
+display: none !important;
+}
+tr[class=3Dem_show] {
+display: table-row !important;
+}
+td[class=3Dem_align_center] {
+text-align: center !important;
+}
+td[class=3Dem_mar_top] {
+margin-top: 20px !important;
+}
+td[class=3Dem_pad_top] {
+padding-top: 20px !important;
+}
+td[class=3Dem_side_space] {
+padding-left: 20px !important;
+padding-right: 20px !important;
+}
+td[class=3Dem_bg_center] {
+background-position: center !important;
+}
+td[class=3Dem_height_80] {
+height: 120px !important;
+}
+img[class=3Dem_full_width] {
+width: 100% !important;
+height: auto !important;
+max-width: 100% !important;
+}
+td[class=3Dem_pad_btm] {
+padding-bottom: 28px !important;
+}
+td[class=3Dem_no_pad] {
+padding-top: 0 !important;
+padding-right: 0 !important;
+padding-bottom: 0 !important;
+padding-left: 0 !important;
+}
+	.stack-column {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    direction: ltr !important;
+}
+}
+@media only screen and (min-width:480px) and (max-width:600px) {
+table[class=3Dem_main_table] {
+width: 100% !important;
+}
+table[class=3Dem_wrapper] {
+width: 100% !important;
+}
+table[class=3Dem_wrapper_box] {
+width: 100% !important;
+margin-bottom: 20px !important;
+}
+td[class=3Dem_hide], br[class=3Dem_hide] {
+display: none !important;
+}
+tr[class=3Dem_show] {
+display: table-row !important;
+}
+td[class=3Dem_align_center] {
+text-align: center !important;
+}
+td[class=3Dem_mar_top] {
+margin-top: 20px !important;
+}
+td[class=3Dem_pad_top] {
+padding-top: 20px !important;
+}
+td[class=3Dem_side_space] {
+padding-left: 20px !important;
+padding-right: 20px !important;
+}
+td[class=3Dem_bg_center] {
+background-position: center !important;
+}
+img[class=3Dem_full_width] {
+width: 100% !important;
+height: auto !important;
+max-width: 100% !important;
+}
+td[class=3Dem_pad_btm] {
+padding-bottom: 28px !important;
+}
+td[class=3Dem_no_pad] {
+padding-top: 0 !important;
+padding-right: 0 !important;
+padding-bottom: 0 !important;
+padding-left: 0 !important;
+}
+=09
+}
+=09
+	@media only screen and (max-width:480px) {
+		.mainicon{
+			display: block;
+			width: 100%;
+		}
+	}
+=09
+</style>
+
+</head>
+=09
+<body style=3D"margin-top:0 !important;margin-right:0 !important;margin-bot=
+tom:0 !important;margin-left:0 !important;padding-top:0 !important;padding-=
+right:0 !important;padding-bottom:0 !important;padding-left:0 !important;ba=
+ckground-color:#dadee0;">
+=09
+  <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" al=
+ign=3D"center" style=3D"background-color:#dadee0; ">
+  <tbody>
+
+  <tr>
+  <td align=3D"center" valign=3D"top" class=3D"" width=3D"600" style=3D"max=
+-width: 600px; width: 600px;">
+
+      <table align=3D"center" class=3D"em_main_table" width=3D"600" border=
+=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"max-width: 600px; width=
+: 600px;" bgcolor=3D"#dadee0">
+
+      <tr>
+          <td width=3D"600" style=3D"max-width: 600px; width: 600px;">
+              <img src=3D"https://info.netsuite.com/core/media/media.nl?id=
+=3D458404097&amp;c=3DNLCORP&amp;h=3DGelpmvp_zOrUfb3ENP8vVOb0HZfbDNiNjxTCWmW=
+MQ-zb4579&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuYXBwLm5ldHN1aXRlLmNvbQ**" alt=3D"Or=
+acle NetSuite" width=3D"600" class=3D"em_full_width" style=3D"width: 600px;=
+ max-width: 600px; height: auto;" border=3D"0">
+          </td>
+      </tr>
+		 =20
+		 =20
+      <tr>
+          <td bgcolor=3D"#ffffff" width=3D"600" style=3D"max-width: 600px; =
+width: 600px;">
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"0">
+                  <tbody>
+					  <tr>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                      <td class=3D"em_side_space">
+						 =20
+                          <table width=3D"100%" border=3D"0" cellspacing=3D=
+"0" cellpadding=3D"0">
+                              <tbody>
+								  <tr><td height=3D"30" style=3D"border-collapse:collapse; font-siz=
+e:30px; line-height:30px;">&nbsp;</td></tr>
+								  <tr>
+									  <td align=3D"left" valign=3D"top">
+										 =20
+										  <table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" borde=
+r=3D"0">
+										  <tbody>
+											  <tr>
+												  <td class=3D"" width=3D"100%" valign=3D"top">
+													 =20
+													  <table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" al=
+ign=3D"left">
+														  <tr>
+															  <td align=3D"left" valign=3D"top">
+																 =20
+																  <table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%"=
+ border=3D"0">
+																	  <tbody>
+																		  <tr>
+																			  <td class=3D"mainicon" width=3D"60%" valign=3D"middle"=
+>
+																				 =20
+																				  <table cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" align=3D"left">
+																					  <tr>
+																						  <td align=3D"left" class=3D"em_dark_grey_txt" style=
+=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:22px; line-heig=
+ht:26px; font-weight:bold; color:#302E26;">
+																							  Solution Provider Spotlight Award Winners: Fall 20=
+25
+																						  </td>
+																					  </tr>
+																					  <tr>
+																						  <td height=3D"20" style=3D"border-collapse:collapse=
+; font-size:20px; line-height:20px;" class=3D"">&nbsp;</td>
+																					  </tr>
+																					  <tr>
+																						  <td align=3D"left" class=3D"em_dark_grey_txt" style=
+=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-heig=
+ht:20px; color:#312D2A;">
+																							  Congratulations to our Fall 2025 Spotlight Award w=
+inners! We recognize your outstanding work in implementing NetSuite for our=
+ customers.
+																						  </td>
+																					  </tr>
+																				  </table>
+																			 =20
+																			  </td>
+
+                                              								  <td class=3D"mainic=
+on" width=3D"50%" valign=3D"middle">
+
+																				  <table cellpadding=3D"0" cellspacing=3D"0" width=3D"1=
+00%" align=3D"left">
+
+																					  <tr valign=3D"middle">
+																						  <td align=3D"middle" class=3D"em_dark_grey_txt" sty=
+le=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; color:#=
+312D2A;"><span class=3D"em_dark_grey_txt" style=3D"font-family:'Oracle Sans=
+', Arial, sans-serif; font-size:14px; color:#312D2A;"><img src=3D"https://i=
+nfo.netsuite.com/core/media/media.nl?id=3D458404207&amp;c=3DNLCORP&amp;h=3D=
+4yLVudOO_UJkQniZa_UC1bIXxWfzF9bsgzckZe5noqR3NqdF&amp;_od=3DaHR0cHM6Ly9ubGNv=
+cnAuYXBwLm5ldHN1aXRlLmNvbQ**" alt=3D"" width=3D"150" style=3D"max-width: 15=
+0px !important; width: 150px;"></span></td>
+																					  </tr>
+
+																				  </table>
+																			  </td>
+																		  </tr>
+																	  </tbody>
+																  </table>
+																 =20
+															  </td>
+														  </tr>
+													  </table>
+													 =20
+												  </td>
+											  </tr>
+										  </tbody>
+										  </table>
+										 =20
+									  </td>
+								  </tr>
+								  <tr><td height=3D"30" style=3D"border-collapse:collapse; font-siz=
+e:30px; line-height:30px;">&nbsp;</td></tr>
+							  </tbody>
+						  </table>
+						 =20
+                      </td>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                  	  </tr>
+				  </tbody>
+			  </table>
+          </td>
+      </tr>
+
+      <tr>
+          <td bgcolor=3D"#C0B89D" width=3D"600" style=3D"max-width: 600px; =
+width: 600px;">
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"0">
+                  <tbody><tr>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                      <td class=3D"em_side_space">
+                          <table width=3D"100%" border=3D"0" cellspacing=3D=
+"0" cellpadding=3D"0">
+                              <tbody><tr>
+                                  <td height=3D"30" style=3D"border-collaps=
+e:collapse; font-size:30px; line-height:30px;">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                  <td align=3D"left" class=3D"em_dark_grey_=
+txt" style=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:16px;=
+ line-height:22px; font-weight:bold; color:#302E26;">
+                                      Industry Spotlight Winners
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td height=3D"20" style=3D"border-collaps=
+e:collapse; font-size:20px; line-height:20px;" class=3D"">&nbsp;</td>
+                              </tr>=09
+                              <!-- =3D=3D=3D=3D=3D BODY =3D=3D=3D=3D=3D -->
+
+                              <tr>
+
+                              <td align=3D"left" valign=3D"top">
+
+                                <table width=3D"100%" cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" style=3D"font-family:'Oracle Sans', Arial, sans=
+-serif; font-size:14px; line-height:20px; color:#000000;">
+
+
+                                        <tr valign=3D"top" bgcolor=3D"#D8D0=
+B5">
+                                        <td width=3D"50%" class=3D"em_dark_=
+grey_txt" style=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:=
+14px; line-height:20px; padding: 10px;">
+                                            <strong>Apparel, Footwear and A=
+ccessories</strong><br>
+                                            Citrin Cooperman
+                                        </td>
+                                        <td width=3D"50%" style=3D"font-fam=
+ily:'Oracle Sans', Arial, sans-serif; font-size:14px; line-height:20px; pad=
+ding: 10px;">
+                                            <strong>Automotive</strong><br>
+                                            Oasis Solutions
+                                        </td>
+                                        </tr>
+
+
+                                        <tr>
+                                        <td height=3D"20" style=3D"border-c=
+ollapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                        <td height=3D"20" style=3D"border-c=
+ollapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                        </tr>
+
+
+                                        <tr valign=3D"top">
+                                        <td class=3D"em_dark_grey_txt" styl=
+e=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-hei=
+ght:20px; padding: 10px;">
+                                            <strong>Energy/Solar</strong><b=
+r>
+                                            Protelo, Inc.
+                                        </td>
+                                        <td class=3D"em_dark_grey_txt" styl=
+e=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-hei=
+ght:20px; padding: 10px;">
+                                            <strong>Healthcare</strong><br>
+                                            Luxent
+                                        </td>
+                                        </tr>
+
+
+                                        <tr>
+                                        <td height=3D"20" style=3D"border-c=
+ollapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                        <td height=3D"20" style=3D"border-c=
+ollapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                        </tr>
+
+
+                                        <tr valign=3D"top" bgcolor=3D"#D8D0=
+B5">
+                                        <td class=3D"em_dark_grey_txt" styl=
+e=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-hei=
+ght:20px; padding: 10px;">
+                                            <strong>Logistics and Transport=
+ation</strong><br>
+                                            Cirrus ERP Partners
+                                        </td>
+                                        <td class=3D"em_dark_grey_txt" styl=
+e=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-hei=
+ght:20px; padding: 10px;">
+                                            <strong>Medical Devices and Equ=
+ipment</strong><br>
+                                            Strategic Information Group
+                                        </td>
+                                        </tr>
+								=09
+									    <tr>
+                                        <td height=3D"20" style=3D"border-c=
+ollapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                        <td height=3D"20" style=3D"border-c=
+ollapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                        </tr>
+								=09
+								=09
+									    <tr valign=3D"top">
+                                        <td class=3D"em_dark_grey_txt" styl=
+e=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-hei=
+ght:20px; padding: 10px;">
+                                            <strong>Retail</strong><br>
+                                            CohnReznick Advisory LLC
+                                        </td>
+                                        <td class=3D"em_dark_grey_txt" styl=
+e=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-hei=
+ght:20px; padding: 10px;">
+                                            <strong>Wholesale Distribution<=
+/strong><br>
+                                            GURUS Solutions
+                                        </td>
+                                        </tr>
+
+
+                                        </table>
+
+                              </td>
+                              </tr>
+
+
+                              <tr>
+                                  <td height=3D"30" style=3D"border-collaps=
+e:collapse; font-size:30px; line-height:30px;">&nbsp;</td>
+                              </tr>
+                          </tbody></table>
+                      </td>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                  </tr>
+              </tbody></table>
+          </td>
+      </tr>
+
+
+
+      <tr>
+          <td bgcolor=3D"#E4E1DD" width=3D"600" style=3D"max-width: 600px; =
+width: 600px;">
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"0">
+                  <tbody><tr>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                      <td class=3D"em_side_space">
+                          <table width=3D"100%" border=3D"0" cellspacing=3D=
+"0" cellpadding=3D"0">
+                              <tbody><tr>
+                                  <td height=3D"30" style=3D"border-collaps=
+e:collapse; font-size:30px; line-height:30px;">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                  <td align=3D"left" class=3D"em_dark_grey_=
+txt" style=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:16px;=
+ line-height:22px; font-weight:bold; color:#302E26;">
+                                      Competitive Spotlight Winner
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td height=3D"20" style=3D"border-collaps=
+e:collapse; font-size:20px; line-height:20px;" class=3D"">&nbsp;</td>
+                              </tr>=09
+                              <!-- =3D=3D=3D=3D=3D BODY =3D=3D=3D=3D=3D -->
+
+
+
+                              <tr>
+
+                              <td align=3D"left" valign=3D"top">
+
+                                <table width=3D"100%" cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" style=3D"font-family:'Oracle Sans', Arial, sans=
+-serif; font-size:14px; line-height:20px; color:#000000;">
+
+
+                                        <tr valign=3D"top" bgcolor=3D"#EBE8=
+E3">
+                                        <td width=3D"50%" class=3D"em_dark_=
+grey_txt" style=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:=
+14px; line-height:20px; padding: 10px;">
+                                            <strong>SAP Switch</strong><br>
+                                            ERP Success Partners
+                                        </td>
+                                        <!--
+                                        <td width=3D"50%" style=3D"font-fam=
+ily:'Oracle Sans', Arial, sans-serif; font-size:14px; line-height:20px; pad=
+ding: 10px;" >
+                                            <strong>NetSuite Analytics Ware=
+house</strong><br/>
+                                            Riveron
+                                        </td>-->
+                                        </tr>
+
+                                        </table>
+
+                              </td>
+                              </tr>=09
+
+
+
+
+                              <tr>
+                                  <td height=3D"30" style=3D"border-collaps=
+e:collapse; font-size:30px; line-height:30px;">&nbsp;</td>
+                              </tr>
+                          </tbody></table>
+                      </td>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                  </tr>
+              </tbody></table>
+          </td>
+      </tr>
+
+
+
+
+
+      <tr>
+          <td bgcolor=3D"#C0B89D" width=3D"600" style=3D"max-width: 600px; =
+width: 600px;">
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"0">
+                  <tbody><tr>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                      <td class=3D"em_side_space">
+                          <table width=3D"100%" border=3D"0" cellspacing=3D=
+"0" cellpadding=3D"0">
+                              <tbody><tr>
+                                  <td height=3D"30" style=3D"border-collaps=
+e:collapse; font-size:30px; line-height:30px;">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                  <td align=3D"left" class=3D"em_dark_grey_=
+txt" style=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:16px;=
+ line-height:22px; font-weight:bold; color:#302E26;">
+                                      Private Equity Spotlight Winners
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td height=3D"20" style=3D"border-collaps=
+e:collapse; font-size:20px; line-height:20px;" class=3D"">&nbsp;</td>
+                              </tr>=09
+                              <!-- =3D=3D=3D=3D=3D BODY =3D=3D=3D=3D=3D -->
+
+
+                              <tr>
+
+                              <td align=3D"left" valign=3D"top">
+
+                              <table width=3D"100%" cellpadding=3D"0" cells=
+pacing=3D"0" border=3D"0" style=3D"font-family:'Oracle Sans', Arial, sans-s=
+erif; font-size:14px; line-height:20px; color:#000000; ">
+
+
+                                      <tr valign=3D"top" bgcolor=3D"#D8D0B5=
+">
+                                      <td width=3D"50%" class=3D"em_dark_gr=
+ey_txt" style=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14=
+px; line-height:20px; padding: 10px;">
+                                          <strong>Carveout</strong><br>
+                                          Business Solution Partners
+                                      </td>
+                                      <td width=3D"50%" style=3D"font-famil=
+y:'Oracle Sans', Arial, sans-serif; font-size:14px; line-height:20px; paddi=
+ng: 10px;">
+                                          <strong>Increasing Business Visib=
+ility</strong><br>
+                                          Citrin Cooperman
+                                      </td>
+                                      </tr>
+
+
+                                      <tr>
+                                      <td height=3D"20" style=3D"border-col=
+lapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                      <td height=3D"20" style=3D"border-col=
+lapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                      </tr>
+
+
+                                      <tr valign=3D"top">
+                                      <td class=3D"em_dark_grey_txt" style=
+=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-heig=
+ht:20px; padding: 10px;">
+                                          <strong>Mergers and Acquisitions<=
+/strong><br>
+                                          GURUS Solutions
+                                      </td>
+                                      <td class=3D"em_dark_grey_txt" style=
+=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14px; line-heig=
+ht:20px; padding: 10px;">
+										  <strong>Rapid Scaling</strong><br>
+                                          Terillium, Inc.
+                                      </td>
+                                      </tr>
+								 =20
+								      <tr>
+                                      <td height=3D"20" style=3D"border-col=
+lapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                      <td height=3D"20" style=3D"border-col=
+lapse:collapse; font-size:20px; line-height:20px;" class=3D""></td>
+                                      </tr>
+								 =20
+								      <tr valign=3D"top" bgcolor=3D"#D8D0B5">
+                                      <td width=3D"50%" class=3D"em_dark_gr=
+ey_txt" style=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:14=
+px; line-height:20px; padding: 10px;">
+                                          <strong>Transforming Business Ope=
+rations</strong><br>
+                                          GURUS Solutions
+                                      </td>
+                                      <td width=3D"50%" style=3D"font-famil=
+y:'Oracle Sans', Arial, sans-serif; font-size:14px; line-height:20px; paddi=
+ng: 10px;">&nbsp;
+                                         =20
+                                      </td>
+                                      </tr>
+
+                                      </table>
+
+                              </td>
+                              </tr>=09
+
+
+                              <tr>
+                                  <td height=3D"30" style=3D"border-collaps=
+e:collapse; font-size:30px; line-height:30px;">&nbsp;</td>
+                              </tr>
+                          </tbody></table>
+                      </td>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                  </tr>
+              </tbody></table>
+          </td>
+      </tr>
+
+
+
+      <tr>
+          <td bgcolor=3D"#ffffff" width=3D"600" style=3D"max-width: 600px; =
+width: 100%;">
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"0">
+                  <tbody><tr>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                      <td class=3D"em_side_space">
+                          <table width=3D"100%" border=3D"0" cellspacing=3D=
+"0" cellpadding=3D"0">
+                              <tbody>
+
+                                  <tr>
+                                  <td height=3D"30" style=3D"border-collaps=
+e:collapse; font-size:30px; line-height:30px;">&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                      <td align=3D"left" class=3D"em_dark_g=
+rey_txt" style=3D"font-family:'Oracle Sans', Arial, sans-serif; font-size:1=
+4px; line-height:20px; color:#312D2A;">
+                                          Please find the full list of winn=
+ers on the NetSuite website <a href=3D"https://info.netsuite.com/app/crm/ma=
+rketing/campaignlistener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D37523099=
+5&amp;eou=3DaHR0cHM6Ly93d3cubmV0c3VpdGUuY29tL3BvcnRhbC9wYXJ0bmVycy9zb2x1dGl=
+vbnByb2dyYW0vc3BvdGxpZ2h0LWF3YXJkcy1hdXR1bW4tMjAyNS5zaHRtbA**&amp;__h=3DAAF=
+dikaIsxBHDaRgAtCPmuVhDRbtDMuokLzJ_tkd7L5TdVm6Oz8&amp;_od=3DaHR0cHM6Ly9ubGNv=
+cnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t" target=3D"_blank" style=3D"text-decoratio=
+n: underline; color: #A36472;"><strong>here</strong></a>. Thank you to all =
+our Solution Providers who submitted client stories for consideration!
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td height=3D"30" style=3D"border-col=
+lapse:collapse; font-size:30px; line-height:30px;">&nbsp;</td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </td>
+                      <td width=3D"40" class=3D"em_hide">&nbsp;</td>
+                  </tr>
+              </tbody></table>
+          </td>
+      </tr>
+		 =20
+		 =20
+		 =20
+		 =20
+	  <tr>
+          <td width=3D"600" style=3D"max-width: 600px; width: 600px;">
+              <img src=3D"https://info.netsuite.com/core/media/media.nl?id=
+=3D464934770&amp;c=3DNLCORP&amp;h=3DJcgSWPUcH3IAZQPwgdqeL2wFvBKiwRsZS5COtZg=
+Rm2IH2989&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuYXBwLm5ldHN1aXRlLmNvbQ**" alt=3D"Or=
+acle NetSuite" width=3D"600" class=3D"em_full_width" style=3D"width: 600px;=
+ max-width: 600px; height: 12px;" border=3D"0">
+          </td>
+      </tr>	 =20
+		 =20
+	 =20
+		 =20
+                 =20
+		 =20
+      <tr>
+              <td bgcolor=3D"#13212C" width=3D"600" style=3D"max-width: 600=
+px; width: 100%;">
+				  <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D=
+"0" class=3D"em_main_table" style=3D"max-width: 600px; width: 600px;" width=
+=3D"600">
+                  <tbody>
+                    <tr>
+                      <td class=3D"mob-logo-email-ftr" style=3D"padding: 37=
+px 30px 6px 30px; margin: 0; line-height: 0px;"><a href=3D"https://info.net=
+suite.com/app/crm/marketing/campaignlistener.nl?c=3DNLCORP&amp;__lstr=3D__c=
+l&amp;__r=3D375230995&amp;eou=3DaHR0cHM6Ly93d3cubmV0c3VpdGUuY29t&amp;__h=3D=
+AAFdikaIGk2qAEtpkiGMrgE1_xGQ1ceDRrBRum87Tp42qcz3gzk&amp;_od=3DaHR0cHM6Ly9ub=
+GNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t" style=3D"display: block;" target=3D"_b=
+lank"><img align=3D"top" alt=3D"Oracle NetSuite" border=3D"0" src=3D"https:=
+//info.netsuite.com/core/media/media.nl?id=3D393075734&amp;c=3DNLCORP&amp;h=
+=3DwOjhUiHxC2u5svThlvMm9Q9Kbr04g4wZs4GNbgFB25hBUU3G&amp;_od=3DaHR0cHM6Ly9ub=
+GNvcnAuYXBwLm5ldHN1aXRlLmNvbQ**" style=3D"max-width: 100%; width: 186px; di=
+splay: block;" width=3D"186"></a></td>
+                    </tr>
+                    <tr>
+                      <td class=3D"mob-contact-email-ftr" style=3D"padding:=
+ 6px 30px 42px 30px; font-family: 'Oracle Sans', Arial, sans-serif; font-si=
+ze: 9px; line-height: 12px; color: #ffffff;"><p style=3D"margin: 0; color: =
+#fff; font-family: 'Oracle Sans', Arial, sans-serif;"><a style=3D"text-deco=
+ration: none !important; color: #fff; font-family: 'Oracle Sans', Arial, sa=
+ns-serif;">2300 Oracle Way | Austin, TX 78741 | United States | </a><a href=
+=3D"https://info.netsuite.com/app/crm/marketing/campaignlistener.nl?c=3DNLC=
+ORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DdGVsOisxNzM3ODY3MTAwMA*=
+*&amp;__h=3DAAFdikaIPIVWU-Bm-ii0nKsOL8Bfl0BIV-76ci8rfB3ny8UW5tE&amp;_od=3Da=
+HR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t" style=3D"text-decoration: =
+none !important; color: #fff; font-family: 'Oracle Sans', Arial, sans-serif=
+;">+1 737.867.1000</a></p></td>
+                    </tr>
+                    <tr>
+                      <td class=3D"mob-logo-email-ftr" style=3D"margin: 0; =
+line-height: 0px;">
+						  <table cellpadding=3D"0" cellspacing=3D"0" width=3D"600" style=3D"m=
+ax-width: 600px; width: 100%;">
+                          <tr>
+                            <td class=3D"stack-column" style=3D"padding: 0p=
+x 5px 31px 30px; text-align: left; font-family: 'Oracle Sans', Arial, sans-=
+serif; font-size: 9px; line-height: 12px; color: #ffffff;">
+							=09
+								<p style=3D"margin: 0 0 0 0; font-family: 'Oracle Sans', Arial, san=
+s-serif;">
+							=09
+								<a href=3D"https://info.netsuite.com/app/crm/marketing/campaignlist=
+ener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cHM6=
+Ly93d3cub3JhY2xlLmNvbS9sZWdhbC9jb3B5cmlnaHQuaHRtbA**&amp;__h=3DAAFdikaIfap7=
+T_BInhn4ArRYrJwQAlVSqlKu3f761xTHI3sGeKg&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Z=
+m9ybXMubmV0c3VpdGUuY29t" style=3D"text-decoration: underline; color: #fffff=
+f; font-family: 'Oracle Sans', Arial, sans-serif;" target=3D"_blank">=C2=A9=
+ Oracle, and/or its affiliates.</a><br>
+							=09
+                                <a href=3D"https://info.netsuite.com/app/cr=
+m/marketing/campaignlistener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D3752=
+30995&amp;eou=3DaHR0cHM6Ly93d3cub3JhY2xlLmNvbS9sZWdhbC9wcml2YWN5L2luZGV4Lmh=
+0bWw*&amp;__h=3DAAFdikaILfbQX5gFk9HsyLH13uNfqqTPisA7FFJoDWUuW7CaqiE&amp;_od=
+=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t" style=3D"text-decorati=
+on: underline; color: #ffffff; font-family: 'Oracle Sans', Arial, sans-seri=
+f;" target=3D"_blank">Terms of Use and Privacy</a> |=20
+							=09
+								<a href=3D"https://info.netsuite.com/app/crm/marketing/campaignlist=
+ener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cHM6=
+Ly93d3cub3JhY2xlLmNvbS9jb3Jwb3JhdGUvY29udGFjdC9nbG9iYWwuaHRtbA**&amp;__h=3D=
+AAFdikaIz3JyAq6ljCIrOIWtuUpmQyposWyqESfyZOXTMV9TNf4&amp;_od=3DaHR0cHM6Ly9ub=
+GNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t" style=3D"text-decoration: underline; c=
+olor: #ffffff; font-family: 'Oracle Sans', Arial, sans-serif;" target=3D"_b=
+lank">Contact Us</a> |=20
+							=09
+								<a href=3D"https://info.netsuite.com/app/crm/marketing/campaignlist=
+ener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cHM6=
+Ly93d3cub3JhY2xlLmNvbS9jb3Jwb3JhdGUvZXZlbnQtY29kZS1vZi1jb25kdWN0Lmh0bWw*&am=
+p;__h=3DAAFdikaI-4LKsSIQ7BrpnltFlIBwALc0jnQ6zew6oN8pVc9nQas&amp;_od=3DaHR0c=
+HM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t" style=3D"text-decoration: unde=
+rline; color: #ffffff; font-family: 'Oracle Sans', Arial, sans-serif;" targ=
+et=3D"_blank">Code of Conduct</a><br>
+							=09
+                                <a data-targetname=3D"Subscription Center -=
+ 2017 (oracle.netsuite.com)" data-targettype=3D"landingpage" href=3D"https:=
+//info.netsuite.com/app/crm/marketing/campaignlistener.nl?c=3DNLCORP&amp;__=
+lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cHM6Ly9ubGNvcnAuYXBwLm5ldHN1a=
+XRlLmNvbS9jb3JlL21lZGlhL21lZGlhLm5sP2lkPTIwOTI4MDY3MSZjPU5MQ09SUCZoPTE0MGFl=
+ZDViNzFkNTkxZDc3YjA5Jl94dD0uaHRtbCZuaWQ9JA**&amp;__h=3DAAFdikaIOkjGwPVUdNdt=
+lp22hXblq-2Y-50i1mLJqt_xttLCnQU&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMub=
+mV0c3VpdGUuY29t" style=3D"text-decoration: underline; color: #ffffff; font-=
+family: 'Oracle Sans', Arial, sans-serif;" target=3D"_blank">Manage Email P=
+references</a> |=20
+							=09
+								<a data-targetname=3D"Subscription Center - 2017 (oracle.netsuite.c=
+om)" data-targettype=3D"landingpage" href=3D"https://info.netsuite.com/app/=
+crm/marketing/campaignlistener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D37=
+5230995&amp;eou=3DaHR0cHM6Ly9ubGNvcnAuYXBwLm5ldHN1aXRlLmNvbS9jb3JlL21lZGlhL=
+21lZGlhLm5sP2lkPTIwOTI4MDY3MSZjPU5MQ09SUCZoPTE0MGFlZDViNzFkNTkxZDc3YjA5Jl94=
+dD0uaHRtbCZuaWQ9JA**&amp;__h=3DAAFdikaIOkjGwPVUdNdtlp22hXblq-2Y-50i1mLJqt_x=
+ttLCnQU&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t" style=
+=3D"text-decoration: underline; color: #ffffff; font-family: 'Oracle Sans',=
+ Arial, sans-serif;" target=3D"_blank">Unsubscribe from All</a>
+							=09
+								</p>
+							 =20
+							  </td>
+							 =20
+							  <td class=3D"stack-column" style=3D"padding: 2px 30px 31px 5px; te=
+xt-align: right; line-height: 0px; box-sizing: border-box; font-size: 0;">
+								  <a href=3D"https://info.netsuite.com/app/crm/marketing/campaignli=
+stener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cH=
+M6Ly93d3cuZmFjZWJvb2suY29tL05ldFN1aXRl&amp;__h=3DAAFdikaIoLhJMAztKUgg2ZjDmZ=
+McFMzn7Ead-KdfLnghVXzxIJ4&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3V=
+pdGUuY29t" style=3D"text-decoration: none; display: inline-block; height: 1=
+00%; line-height: 1; vertical-align: middle; font-size: 14px;" target=3D"_b=
+lank"><img alt=3D"Facebook" height=3D"20" src=3D"https://info.netsuite.com/=
+core/media/media.nl?id=3D393075018&amp;c=3DNLCORP&amp;h=3DQgGuEzrv1mvegJip5=
+6ZlsyVgZhYK-V1Qd19OhS9r4BDRWsqU&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuYXBwLm5ldHN1a=
+XRlLmNvbQ**" style=3D"height: 20px; display: inline-block; max-height: 20px=
+;">&nbsp;&nbsp;&nbsp;&nbsp;</a>=20
+								 =20
+								  <a href=3D"https://info.netsuite.com/app/crm/marketing/campaignli=
+stener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cH=
+M6Ly93d3cubGlua2VkaW4uY29tL2NvbXBhbnkvbmV0c3VpdGU*&amp;__h=3DAAFdikaIpRQKTq=
+cVAdr91rLCGqlJbxuRI9t1rrrclW4Vx2OoWsg&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9=
+ybXMubmV0c3VpdGUuY29t" style=3D"text-decoration: none; display: inline-bloc=
+k; height: 100%; line-height: 1; vertical-align: middle; font-size: 14px;" =
+target=3D"_blank"><img alt=3D"LinkedIn" height=3D"19" src=3D"https://info.n=
+etsuite.com/core/media/media.nl?id=3D393075021&amp;c=3DNLCORP&amp;h=3DAcLk0=
+Seel1Fm5YRfKrmTlBzeC0Sjnt4kAx8nxzDp55khMvOB&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuY=
+XBwLm5ldHN1aXRlLmNvbQ**" style=3D"height: 19px; display: inline-block; max-=
+height: 19px;">&nbsp;&nbsp;&nbsp;&nbsp;</a>=20
+								 =20
+								  <a href=3D"https://info.netsuite.com/app/crm/marketing/campaignli=
+stener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cH=
+M6Ly93d3cudHdpdHRlci5jb20vTmV0U3VpdGU*&amp;__h=3DAAFdikaITFT594msqpNGR_7ii7=
+3U9DiZnAAZXedB_3ve6FSN_oQ&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3V=
+pdGUuY29t" style=3D"text-decoration: none; display: inline-block; height: 1=
+00%; line-height: 1; vertical-align: middle; font-size: 14px;" target=3D"_b=
+lank"><img alt=3D"Twitter" height=3D"18" src=3D"https://info.netsuite.com/c=
+ore/media/media.nl?id=3D393075022&amp;c=3DNLCORP&amp;h=3D-iRxyMr_jD-3Tr73IR=
+DTVT3m9oEqYbuYNyNlb-z9bdrvloan&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuYXBwLm5ldHN1aX=
+RlLmNvbQ**" style=3D"height: 18px; display: inline-block; max-height: 18px;=
+">&nbsp;&nbsp;&nbsp;&nbsp;</a>=20
+								 =20
+								  <a href=3D"https://info.netsuite.com/app/crm/marketing/campaignli=
+stener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cH=
+M6Ly93d3cuaW5zdGFncmFtLmNvbS9vcmFjbGVuZXRzdWl0ZQ**&amp;__h=3DAAFdikaI_wPiTE=
+2XHriM8AcnHaCPWciBszbKS9YN860fP1eryPk&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9=
+ybXMubmV0c3VpdGUuY29t" style=3D"text-decoration: none; display: inline-bloc=
+k; height: 100%; line-height: 1; vertical-align: middle; font-size: 14px;" =
+target=3D"_blank"><img alt=3D"Instagram" height=3D"18" src=3D"https://info.=
+netsuite.com/core/media/media.nl?id=3D393075019&amp;c=3DNLCORP&amp;h=3Dgfls=
+Cp9hbjgxiskM0Wdtgx0yuSLNJykFMBFpHoRje4QxplDB&amp;_od=3DaHR0cHM6Ly9ubGNvcnAu=
+YXBwLm5ldHN1aXRlLmNvbQ**" style=3D"height: 18px; display: inline-block; max=
+-height: 18px;"></a>
+								 =20
+							  </td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </tbody>
+                </table></td>
+            </tr>
+      <!-- =3D=3D=3D=3D=3D //FOOTER SECTION =3D=3D=3D=3D=3D -->
+
+  </table></td></tr></tbody>
+
+
+
+
+
+  </table>
+
+<div align=3D"right">
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"2">
+<tr>
+<td height=3D"3" colspan=3D"2">=20
+<hr size=3D"1" noshade=3D"" color=3D"#B7C7D4">
+</td>
+</tr>
+<tr>
+<td valign=3D"top">&nbsp;
+<img border=3D"0" width=3D"0" height=3D"0" src=3D"https://info.netsuite.com=
+/app/crm/marketing/campaignlistener.nl?c=3DNLCORP&amp;__lstr=3D__tem&amp;__=
+r=3D375230995&amp;__h=3DAAFdikaIz3MlWgzY8xvjWugcTUNDlPLWhBgPnjZ8jA534RBuFTk=
+&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t">
+</td>
+<td align=3D"right">
+<font face=3D"Arial" color=3D"gray" size=3D"1">
+You are subscribed as &lt;dgilbert@netsuite.com&gt;. Click <a target=3D"_bl=
+ank" href=3D"https://info.netsuite.com/app/crm/marketing/campaignlistener.n=
+l?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&amp;eou=3DaHR0cHM6Ly9ubG=
+NvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29tL2FwcC9jcm0vbWFya2V0aW5nL2NhbXBhaWdubGlzd=
+GVuZXIubmw_Yz1OTENPUlAmX19sc3RyPV9fc3UmX19yPTM3NTIzMDk5NSZfX29pPW0mX19oPUFB=
+RmRpa2FJTVJDNi1kTnc4VDJ4WEhqcnY3dTRMX0RsUDhGLWhUSUtDLU5pcWhndElFMA**&amp;__=
+h=3DAAFdikaId5dCZp8RFeDnmP6yHeIIiKJPdd2CCAxhSkrNtJxWMbo&amp;_od=3DaHR0cHM6L=
+y9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t">here</a> to manage your email subs=
+cription preferences.
+<br>
+Click <a target=3D"_blank" href=3D"https://info.netsuite.com/app/crm/market=
+ing/campaignlistener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&am=
+p;eou=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29tL2FwcC9jcm0vbWFya2V=
+0aW5nL2NhbXBhaWdubGlzdGVuZXIubmw_Yz1OTENPUlAmX19sc3RyPV9fc3UmX19yPTM3NTIzMD=
+k5NSZfX29pPXUmX19oPUFBRmRpa2FJTVJDNi1kTnc4VDJ4WEhqcnY3dTRMX0RsUDhGLWhUSUtDL=
+U5pcWhndElFMA**&amp;__h=3DAAFdikaI3QHLw1dLjLvVMbTzRjMHUATbS0rqwipSayk9o24zp=
+o8&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29t">here</a> or =
+reply to this email with 'unsubscribe' in the subject to unsubscribe from t=
+his list or if you feel you have received this message in error.<br>This me=
+ssage was sent from NetSuite Oracle America, Inc.
+ 500 Oracle Parkway
+ Redwood Shores CA 94065
+ United States
+ 800 762 5524
+ <a href=3D"http://www.netsuite.com">www.netsuite.com</a>.
+Click <a target=3D"_blank" href=3D"https://info.netsuite.com/app/crm/market=
+ing/campaignlistener.nl?c=3DNLCORP&amp;__lstr=3D__cl&amp;__r=3D375230995&am=
+p;eou=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubmV0c3VpdGUuY29tL2FwcC9zaXRlL2NybS9=
+leHRlcm5hbGNhc2VwYWdlLm5sP2NvbXBpZD1OTENPUlAmZm9ybWlkPTE1Jmg9QUFGZGlrYUlKYT=
+JZNU4yXzJQUUJZY01fLXRxdEJOSnFiRkNYTjFnUW1iS1o5MENFa09vJnRpdGxlPUNhbXBhaWduK=
+0VtYWlsK0FidXNlJmN1c3RlbnRpdHk3Mz1OTENPUlA*&amp;__h=3DAAFdikaIRK27R4OvieXkg=
+z5tOPn5fOadw5RX6NRIyLG8z0yqHMo&amp;_od=3DaHR0cHM6Ly9ubGNvcnAuZXh0Zm9ybXMubm=
+V0c3VpdGUuY29t">here</a> to report email abuse.<br>
+</font>
+</td>
+</tr>
+</table>
+</div>
+</body>
+=09
+</html>=
+
+------=_Part_1314_1366863802.1764677359271--

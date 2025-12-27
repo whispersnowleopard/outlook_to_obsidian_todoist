@@ -1,0 +1,20 @@
+# Mac system files
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# NetSuite specific (if you add later)
+node_modules/
+.env
+*.zip
+
+# Temp files
+temp/
+scratch/
+z_archive/
